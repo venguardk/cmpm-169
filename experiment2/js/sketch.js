@@ -15,6 +15,14 @@ let myInstance;
 let canvasContainer;
 var centerHorz, centerVert;
 
+// my globals
+let cols;
+let rows;
+let currBuff;
+let prevBuff;
+
+let dampening = 0.99;
+
 class MyClass {
     constructor(param1, param2) {
         this.property1 = param1;
@@ -49,31 +57,58 @@ function setup() {
     resizeScreen();
   });
   resizeScreen();
+
+  // my added setup
+  pixelDensity(1);
+  cols = width;
+  rows = height;
+  
+  // buffers
+  currBuff = new Array(cols).fill(0).map(n => new Array(rows).fill(0));
+  prevBuff = new Array(cols).fill(0).map(n => new Array(rows).fill(0));
+  
+  // set shader
 }
+
 
 // draw() function is called repeatedly, it's the main animation loop
 function draw() {
-  background(220);    
-  // call a method on the instance
-  myInstance.myMethod();
+  background(88, 190, 237);
 
-  // Set up rotation for the rectangle
-  push(); // Save the current drawing context
-  translate(centerHorz, centerVert); // Move the origin to the rectangle's center
-  rotate(frameCount / 100.0); // Rotate by frameCount to animate the rotation
-  fill(234, 31, 81);
-  noStroke();
-  rect(-125, -125, 250, 250); // Draw the rectangle centered on the new origin
-  pop(); // Restore the original drawing context
-
-  // The text is not affected by the translate and rotate
-  fill(255);
-  textStyle(BOLD);
-  textSize(140);
-  text("p5*", centerHorz - 105, centerVert + 40);
+  // random raindrops
+  prevBuff[floor(random(width - 2) + 1)][floor(random(height - 2) + 1)] = 10;
+  
+  // image processing algorithm checks surrounding pixels, adds them up, and subtract currBuff value
+  loadPixels();
+  for (let i = 1; i < cols - 1; i++) {
+    for (let j = 1; j < rows - 1; j++) {
+      currBuff[i][j] =
+        (prevBuff[i - 1][j] +
+          prevBuff[i + 1][j] +
+          prevBuff[i][j - 1] +
+          prevBuff[i][j + 1]) / 2 -
+          currBuff[i][j];
+      currBuff[i][j] = currBuff[i][j] * dampening;
+    // setting colors for pixels
+      let index = (i + j * cols) * 4;
+      pixels[index + 0] = currBuff[i][j];
+      pixels[index + 1] = currBuff[i][j] * 190;
+      pixels[index + 2] = currBuff[i][j]* 237;
+    }
+  }
+  updatePixels();
+  
+  let temp = prevBuff;
+  prevBuff = currBuff;
+  currBuff = temp;
 }
 
 // mousePressed() function is called once after every time a mouse button is pressed
 function mousePressed() {
-    // code to run when mouse is pressed
+  prevBuff[mouseX][mouseY] = 50;
+}
+
+// ripple while dragging
+function mouseDragged() {
+  prevBuff[mouseX][mouseY] = 50;
 }
