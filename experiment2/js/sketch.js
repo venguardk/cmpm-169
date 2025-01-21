@@ -51,12 +51,12 @@ function setup() {
   // resize canvas is the page is resized
 
   // create an instance of the class
-  myInstance = new MyClass("VALUE1", "VALUE2");
+  // myInstance = new MyClass("VALUE1", "VALUE2");
 
-  $(window).resize(function() {
-    resizeScreen();
-  });
-  resizeScreen();
+  // $(window).resize(function() {
+  //   resizeScreen();
+  // });
+  // resizeScreen();
 
   // my added setup
   pixelDensity(1);
