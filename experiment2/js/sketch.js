@@ -70,6 +70,15 @@ function setup() {
   // set shader
 }
 
+// mousePressed() function is called once after every time a mouse button is pressed
+function mousePressed() {
+  prevBuff[mouseX][mouseY] = 50;
+}
+
+// ripple while dragging
+function mouseDragged() {
+  prevBuff[mouseX][mouseY] = 50;
+}
 
 // draw() function is called repeatedly, it's the main animation loop
 function draw() {
@@ -103,12 +112,3 @@ function draw() {
   currBuff = temp;
 }
 
-// mousePressed() function is called once after every time a mouse button is pressed
-function mousePressed() {
-  prevBuff[mouseX][mouseY] = 50;
-}
-
-// ripple while dragging
-function mouseDragged() {
-  prevBuff[mouseX][mouseY] = 50;
-}
