@@ -43,14 +43,14 @@ class Circle{
         let closeX = this.x;    // closest sides
         let closeY = this.y;    // ^
 
-        if (closeX < boundary.x - boundary.w){    // rect on left side of circle
+        if (this.x < boundary.x - boundary.w){    // rect on left side of circle
             closeX = boundary.x - boundary.w;
-        } else if (closeX > boundary.x + boundary.w){ // rect on right
+        } else if (this.x> boundary.x + boundary.w){ // rect on right
             closeX = boundary.x + boundary.w;
         }
-        if (closeY > boundary.y + boundary.h){    // rect on top
+        if (this.y > boundary.y + boundary.h){    // rect on top
             closeY = boundary.y + boundary.h;
-        } else if (closeY < boundary.y - boundary.h){ // rect on bot
+        } else if (this.y < boundary.y - boundary.h){ // rect on bot
             closeY = boundary.y - boundary.h;
         }
 
@@ -184,7 +184,7 @@ class Quadtree{
         } else{
             for (let i=0; i<this.points.length; i++){   // adding point to found
                 if (range.contains(this.points[i])){
-                    found.push(this.points[i]);
+                    found.push(this.points[i].userData);
                 }
             }
             //if this boundary is already divided,then we want to call quandary again
@@ -201,16 +201,16 @@ class Quadtree{
     // visualize in sketch
     display(){
         noFill();
-        stroke(0);
+        stroke(220);
         rectMode(CENTER);
         rect(this.boundary.x, this.boundary.y, this.boundary.w * 2, this.boundary.h *2);
 
         // drawing out points
-        for (let i = 0; i < this.points.length; i++){
-            noStroke();
-            fill(0, 0, 255);
-            ellipse(this.points[i].x, this.points[i].y, 10, 10);
-        }
+        // for (let i = 0; i < this.points.length; i++){
+        //     noStroke();
+        //     fill(0, 0, 255);
+        //     ellipse(this.points[i].x, this.points[i].y, 10, 10);
+        // }
 
         if (this.divided){
             this.northeast.display();
