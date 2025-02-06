@@ -15,6 +15,16 @@ let myInstance;
 let canvasContainer;
 var centerHorz, centerVert;
 
+// declarations
+let boids = [];
+let num = 1500;
+let quadtree;
+let boundary;
+let capacity = 10;
+let perceptionRadius = 30;  // view of boid
+radius = 2;
+
+
 class MyClass {
     constructor(param1, param2) {
         this.property1 = param1;
@@ -49,28 +59,37 @@ function setup() {
     resizeScreen();
   });
   resizeScreen();
+
+  // setting up quadtree
+  boundary = new Rect(width/2, height/2, width/2, height/2);
+  quadtree = new Quadtree(boundary, capacity);
+
+  // creating boid objs
+  for (let i=0; i<num; i++){
+    boids.push(new Boid(random(width), random(height)));
+  }
 }
 
 // draw() function is called repeatedly, it's the main animation loop
 function draw() {
-  background(220);    
-  // call a method on the instance
-  myInstance.myMethod();
+  background(0);
+  // print(frameRate());
 
-  // Set up rotation for the rectangle
-  push(); // Save the current drawing context
-  translate(centerHorz, centerVert); // Move the origin to the rectangle's center
-  rotate(frameCount / 100.0); // Rotate by frameCount to animate the rotation
-  fill(234, 31, 81);
-  noStroke();
-  rect(-125, -125, 250, 250); // Draw the rectangle centered on the new origin
-  pop(); // Restore the original drawing context
+  quadtree.clearQuadtree();
 
-  // The text is not affected by the translate and rotate
-  fill(255);
-  textStyle(BOLD);
-  textSize(140);
-  text("p5*", centerHorz - 105, centerVert + 40);
+  for (let i=0; i<num; i++){ 
+    let p = new Point(boids[i].position.x, boids[i].position.y, boids[i]);
+    quadtree.insert(p);
+
+    let range = new Circle(boids[i].position.x, boids[i].position.y, perceptionRadius);
+    let neighbors = [];
+    quadtree.query(range, neighbors);
+ 
+    boids[i].flock(neighbors);
+    boids[i].update();
+    boids[i].display();
+  }
+  quadtree.display();
 }
 
 // mousePressed() function is called once after every time a mouse button is pressed
