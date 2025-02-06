@@ -61,7 +61,7 @@ function setup() {
   resizeScreen();
 
   // setting up quadtree
-  boundary = new Rect(width/2, height/2, width/2, height/2);
+  boundary = new Rect(width, height, width, height);
   quadtree = new Quadtree(boundary, capacity);
 
   // creating boid objs
