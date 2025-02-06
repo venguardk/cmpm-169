@@ -17,7 +17,7 @@ var centerHorz, centerVert;
 
 // declarations
 let boids = [];
-let num = 1500;
+let num = 1000;
 let quadtree;
 let boundary;
 let capacity = 10;
