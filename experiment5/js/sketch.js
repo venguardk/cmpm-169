@@ -42,10 +42,10 @@ function preload(){
 }
 
 function resizeScreen() {
-  centerHorz = canvasContainer.width() / 2; // Adjusted for drawing logic
-  centerVert = canvasContainer.height() / 2; // Adjusted for drawing logic
-  console.log("Resizing...");
-  resizeCanvas(canvasContainer.width(), canvasContainer.height());
+  // centerHorz = canvasContainer.width() / 2; // Adjusted for drawing logic
+  // centerVert = canvasContainer.height() / 2; // Adjusted for drawing logic
+  // console.log("Resizing...");
+  // resizeCanvas(canvasContainer.width(), canvasContainer.height());
   // redrawCanvas(); // Redraw everything based on new size
 }
 
@@ -53,7 +53,7 @@ function resizeScreen() {
 function setup() {
   // place our canvas, making it fit our container
   canvasContainer = $("#canvas-container");
-  let canvas = createCanvas(canvasContainer.width(), canvasContainer.height(), WEBGL);
+  let canvas = createCanvas(600, 600, WEBGL);
   canvas.parent("canvas-container");
   // resize canvas is the page is resized
 
@@ -75,7 +75,9 @@ function setup() {
   }
 
   slider = createSlider(0, 450);
+  slider.position(650, 600);
   slider2 = createSlider(0, 450);
+  slider2.position(650, 650);
 }
 
 // draw() function is called repeatedly, it's the main animation loop
