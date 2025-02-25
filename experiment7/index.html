@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sketch</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+    <script src="libraries/p5.speech.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  </head>
+
+  <body style="background-color: #abe2f8;">
+    <canvas id="chart"></canvas>
+    <script src="sketch.js"></script>
+    <main id="content">
+      <section>
+  
+        <h1>Experiment 7 - Data Visualization & Networks</h1>
+  
+        <div class="minor-section">
+          <div id="canvas-container">
+            <!-- canvas will be added here -->
+          </div>
+                  <!-- <div class="fullscreen-box">
+                      <button id="fullscreen">Fullscreen</button> -->
+                  </div>
+        </div>
+  
+        <div class="minor-section">
+          <h2>Description</h2>
+          <p>This is a chart that visualizes our moods in a given day. It's inspired by the shape of an aurora. The X-axis charts the time while the y-axis is the intensity of the emotion. The colors represent different moods. You guess what a color correlates to a color.
+          </p>
+        </div>
+  
+        <div class="minor-section">
+          <h2>Technical</h2>
+          <p>We used the chart.js library and parsed through a csv file that contained our charted moods within the day.</p>
+        </div>
+  
+        <div class="minor-section">
+          <h2>Reflection</h2>
+          <p> We used a floating bar graph, because we wanted to emphasize the range in emotion and mood shifts throughout the day. This would also better mimic the shape of an aurora. In the end, I believe we could innovate further, but with the given time constraints and other repsonsiblities, this is our final product. 
+          </p>
+        </div>
+  
+      </section>
+      <nav id="links" class="minor-section">
+        <!-- Put link back to homepage here. -->
+              <ul>
+                  <li><a href="../index.html">Home</a></li>
+              </ul>
+      </nav>
+    </main>
+  </body>
+</html>
